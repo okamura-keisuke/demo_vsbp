@@ -1,7 +1,10 @@
 package com.example.vsbp_demo.service;
 
 
+import com.example.vsbp_demo.data.AuthUser;
 import com.example.vsbp_demo.data.Authorities;
+
+import java.util.List;
 
 public interface IUserService {
 
@@ -45,5 +48,11 @@ public interface IUserService {
      */
     public void registerAuthorities(String userName, String userRoles);
 
+    /**
+     * ユーザ名とパスワードの一覧を、AuthUser型のリストで検索する
+     *
+     * @return AuthUser型のListインスタンス
+     */
+    public List<AuthUser> findAuthUsers();
 
 }

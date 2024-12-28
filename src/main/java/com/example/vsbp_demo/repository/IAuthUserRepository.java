@@ -1,5 +1,9 @@
 package com.example.vsbp_demo.repository;
 
+import com.example.vsbp_demo.data.AuthUser;
+
+import java.util.List;
+
 public interface IAuthUserRepository {
 
     /**
@@ -37,5 +41,11 @@ public interface IAuthUserRepository {
      */
     public boolean existsByUserName(String userName);
 
+    /**
+     * AuthUserテーブルのすべての情報を検索する
+     *
+     * @return レコードの内容を {@link AuthUser} の {@link List} で返す
+     */
+    public List<AuthUser> find();
 
 }

@@ -1,10 +1,13 @@
 package com.example.vsbp_demo.service;
 
+import com.example.vsbp_demo.data.AuthUser;
 import com.example.vsbp_demo.data.Authorities;
 import com.example.vsbp_demo.repository.IAuthUserRepository;
 import com.example.vsbp_demo.repository.IAuthoritiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService implements IUserService {
@@ -13,7 +16,7 @@ public class UserService implements IUserService {
     private final IAuthoritiesRepository authoritiesRepos;
 
     @Autowired
-    public UserService(IAuthUserRepository authUserRepos,IAuthoritiesRepository authoritiesRepos) {
+    public UserService(IAuthUserRepository authUserRepos, IAuthoritiesRepository authoritiesRepos) {
         this.authUserRepos = authUserRepos;
         this.authoritiesRepos = authoritiesRepos;
     }
@@ -38,11 +41,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean findByName(String userName){
+    public boolean findByName(String userName) {
         var result = authUserRepos.existsByUserName(userName);
         System.out.println(userName + " のユーザ照合結果：" + result);
         return result;
-    };
+    }
+
+    ;
 
     @Override
     public Authorities findUserAuthoritiesByUserName(String userName) {
@@ -56,4 +61,10 @@ public class UserService implements IUserService {
         System.out.println("記録行数：" + n + " 行");
     }
 
+    @Override
+    public List<AuthUser> findAuthUsers() {
+        var users = authUserRepos.find();
+        System.out.println("データ件数：" + users.size());
+        return users;
+    }
 }

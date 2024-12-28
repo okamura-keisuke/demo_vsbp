@@ -1,7 +1,9 @@
 package com.example.vsbp_demo.page.signed;
 
+import com.example.vsbp_demo.data.AuthUser;
 import com.example.vsbp_demo.service.IUserService;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -34,5 +36,12 @@ public class SignedPage extends VerticalLayout {
             VaadinSession.getCurrent().getSession().invalidate();
         });
         add(signOutButton);
+
+        // Service からデータベースのユーザ一覧をもらう。
+        var authUsersModel = userService.findAuthUsers();
+
+        Grid<AuthUser> grid = new Grid<>(AuthUser.class);
+        grid.setItems(authUsersModel);
+        add(grid);
     }
 }
